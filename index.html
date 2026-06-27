@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Horror Movie Tracker</title>
+<title>Horror Tracker</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
@@ -26,33 +26,8 @@
   }
 }
 body{background:var(--bg);color:var(--text);min-height:100vh}
-#lock-screen{
-  position:fixed;inset:0;background:var(--bg);display:flex;flex-direction:column;
-  align-items:center;justify-content:center;gap:20px;z-index:1000;
-}
-.lock-logo{font-size:48px;color:var(--red)}
-.lock-title{font-size:22px;font-weight:600;color:var(--text)}
-.lock-sub{font-size:13px;color:var(--text3)}
-.lock-form{display:flex;flex-direction:column;gap:10px;width:280px}
-.lock-form input{
-  padding:10px 14px;font-size:14px;border:0.5px solid var(--border2);
-  border-radius:var(--radius);background:var(--bg2);color:var(--text);text-align:center;
-  letter-spacing:3px;
-}
-.lock-form input:focus{outline:none;border-color:var(--red)}
-.lock-form button{
-  padding:10px;font-size:14px;background:var(--red);color:#fff;border:none;
-  border-radius:var(--radius);cursor:pointer;font-weight:500;
-}
-.lock-form button:hover{background:var(--red-dark)}
-.lock-error{font-size:12px;color:var(--red-text);text-align:center;min-height:16px}
-.lock-hint{font-size:11px;color:var(--text3);text-align:center}
-#app-shell{display:none}
 .app{max-width:900px;margin:0 auto;border:0.5px solid var(--border);min-height:100vh}
-.topbar{
-  padding:11px 16px;border-bottom:0.5px solid var(--border);display:flex;
-  align-items:center;gap:12px;background:var(--bg2);position:sticky;top:0;z-index:10;
-}
+.topbar{padding:11px 16px;border-bottom:0.5px solid var(--border);display:flex;align-items:center;gap:12px;background:var(--bg2);position:sticky;top:0;z-index:10}
 .logo{font-size:15px;font-weight:600;display:flex;align-items:center;gap:7px}
 .logo i{font-size:19px;color:var(--red)}
 .main-tabs{display:flex;margin-left:auto;border:0.5px solid var(--border);border-radius:var(--radius-sm);overflow:hidden}
@@ -61,8 +36,6 @@ body{background:var(--bg);color:var(--text);min-height:100vh}
 .mt.on{background:var(--red);color:#fff}
 .badge{background:var(--red);color:#fff;font-size:10px;padding:1px 5px;border-radius:20px;min-width:16px;text-align:center}
 .mt.on .badge{background:rgba(255,255,255,0.3)}
-.lock-out-btn{padding:4px 8px;font-size:11px;color:var(--text3);border:0.5px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;background:none;margin-left:6px}
-.lock-out-btn:hover{color:var(--red-text)}
 .pg{display:none}.pg.on{display:block}
 .stats-row{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:0.5px solid var(--border)}
 .stat{padding:10px 8px;text-align:center;border-right:0.5px solid var(--border)}
@@ -149,20 +122,6 @@ body{background:var(--bg);color:var(--text);min-height:100vh}
 </style>
 </head>
 <body>
-
-<div id="lock-screen">
-  <i class="ti ti-eye lock-logo"></i>
-  <div class="lock-title">Horror Movie Tracker</div>
-  <div class="lock-sub">personal horror watchlist</div>
-  <div class="lock-form">
-    <input type="password" id="pw-input" placeholder="password" onkeydown="if(event.key==='Enter')checkPassword()"/>
-    <button onclick="checkPassword()">unlock</button>
-    <div class="lock-error" id="pw-error"></div>
-  </div>
-  <div class="lock-hint">set your password in the config section of index.html</div>
-</div>
-
-<div id="app-shell">
 <div class="app">
   <div class="topbar">
     <div class="logo"><i class="ti ti-eye"></i> Horror Tracker</div>
@@ -171,7 +130,6 @@ body{background:var(--bg);color:var(--text);min-height:100vh}
       <div class="mt" onclick="mainTab(this,'recs')"><i class="ti ti-sparkles"></i> recs <span class="badge" id="rec-badge"></span></div>
       <div class="mt" onclick="mainTab(this,'upcoming')"><i class="ti ti-calendar"></i> upcoming</div>
     </div>
-    <button class="lock-out-btn" onclick="lockOut()" title="lock">🔒</button>
   </div>
 
   <div id="pg-list" class="pg on">
@@ -233,38 +191,12 @@ body{background:var(--bg);color:var(--text);min-height:100vh}
   </div>
 
 </div>
-</div>
 
 <script>
-// ─── CONFIG — only edit these three lines ────────────────────────────────────
-const OMDB_KEY  = 'd79a8a16';
-const BACKEND   = 'horrortrackerbackend-production.up.railway.app';
+// ─── CONFIG — only edit these two lines ──────────────────────────────────────
+const OMDB_KEY = 'd79a8a16';
+const BACKEND  = 'https://horrortrackerbackend-production.up.railway.app';
 // ─────────────────────────────────────────────────────────────────────────────
-
-function checkPassword(){
-  const val = document.getElementById('pw-input').value;
-  const err = document.getElementById('pw-error');
-  if(val === PASSWORD){
-    sessionStorage.setItem('ht_auth','1');
-    document.getElementById('lock-screen').style.display = 'none';
-    document.getElementById('app-shell').style.display   = 'block';
-    renderList();
-  } else {
-    err.textContent = 'incorrect password';
-    document.getElementById('pw-input').value = '';
-    setTimeout(()=>err.textContent='', 2000);
-  }
-}
-function lockOut(){
-  sessionStorage.removeItem('ht_auth');
-  document.getElementById('lock-screen').style.display = 'flex';
-  document.getElementById('app-shell').style.display   = 'none';
-  document.getElementById('pw-input').value = '';
-}
-if(sessionStorage.getItem('ht_auth')==='1'){
-  document.getElementById('lock-screen').style.display = 'none';
-  document.getElementById('app-shell').style.display   = 'block';
-}
 
 let films    = JSON.parse(localStorage.getItem('ht_films')   || '[]');
 let recs     = JSON.parse(localStorage.getItem('ht_recs')    || '[]');
@@ -285,7 +217,7 @@ async function fetchOMDB(title){
     const d = await r.json();
     if(d.Response==='True'){
       const rt = d.Ratings?.find(x=>x.Source==='Rotten Tomatoes');
-      return {
+      return{
         imdb:     d.imdbRating !== 'N/A' ? d.imdbRating+'★' : null,
         rt:       rt ? rt.Value : null,
         synopsis: d.Plot       !== 'N/A' ? d.Plot           : null,
@@ -297,7 +229,7 @@ async function fetchOMDB(title){
   return null;
 }
 
-function showStatus(type, msg){
+function showStatus(type,msg){
   const bar=document.getElementById('status-bar');
   const icon=document.getElementById('status-icon');
   const txt=document.getElementById('status-msg');
@@ -336,4 +268,171 @@ function scoreChips(imdb,rt){
 }
 
 function renderList(){
-  const q=(document.getElementById('search-input
+  const q=(document.getElementById('search-input')?.value||'').toLowerCase();
+  const list=films.filter(f=>{
+    const fm=currentFilter==='all'||(currentFilter==='want'&&f.status==='want')||(currentFilter==='seen'&&f.status==='seen');
+    return fm&&(!q||f.title.toLowerCase().includes(q));
+  });
+  const ml=document.getElementById('movie-list');
+  const em=document.getElementById('list-empty');
+  if(!list.length){ ml.innerHTML=''; em.style.display='block'; }
+  else{
+    em.style.display='none';
+    ml.innerHTML=list.map((f,i)=>{
+      const isExp=expandedId===f.id;
+      const nb=f.note?`<span class="chip chip-note" title="${f.note}">📝 ${f.note}</span>`:'';
+      const db=f.dateWatched?`<span class="chip chip-date">${f.dateWatched}</span>`:'';
+      const rb=f.rating?`<span class="chip chip-imdb">${'★'.repeat(f.rating)}${'☆'.repeat(5-f.rating)}</span>`:'';
+      const wb=f.status==='want'
+        ?`<button class="watch-btn want" onclick="setWatched(${f.id},'seen',event)">+ mark watched</button>`
+        :`<button class="watch-btn seen" onclick="setWatched(${f.id},'want',event)">✓ watched</button>`;
+      const stars=[1,2,3,4,5].map(n=>`<span class="${n<=f.rating?'lit':''}" onclick="setRating(${f.id},${n},event)">★</span>`).join('');
+      return `<div class="movie-row">
+        <div class="movie-main" onclick="toggleExpand(${f.id})">
+          <div class="row-num">${i+1}</div>
+          <div class="row-info">
+            <div class="row-title">${f.title}</div>
+            <div class="row-meta">${scoreChips(f.imdb,f.rt)}${rb}${db}${nb}</div>
+          </div>
+          <div class="row-right">
+            ${wb}
+            <div class="view-count">
+              <div class="vc-btn" onclick="incViews(${f.id},-1,event)">−</div>
+              <span>${f.views}×</span>
+              <div class="vc-btn" onclick="incViews(${f.id},1,event)">+</div>
+            </div>
+            <button class="del-btn" onclick="deleteFilm(${f.id},event)">remove</button>
+          </div>
+        </div>
+        <div class="expand-panel${isExp?' open':''}">
+          ${f.synopsis?`<div class="synopsis-box">${f.synopsis}</div>`:''}
+          ${f.notable?`<div class="notable-box">${f.notable}</div>`:''}
+          <div class="note-row">
+            <div class="my-stars" id="stars-${f.id}">${stars}</div>
+            <input type="text" id="note-${f.id}" placeholder="your note…" value="${f.note||''}" onclick="event.stopPropagation()"/>
+          </div>
+          <div class="date-row">
+            <label>last watched</label>
+            <input type="month" id="date-${f.id}" value="${f.dateWatched||''}" onclick="event.stopPropagation()"/>
+            <button class="btn-sm" onclick="saveEntry(${f.id});event.stopPropagation()">save</button>
+          </div>
+        </div>
+      </div>`;
+    }).join('');
+  }
+  const seen=films.filter(f=>f.status==='seen').length;
+  document.getElementById('st-total').textContent=films.length;
+  document.getElementById('st-seen').textContent=seen;
+  document.getElementById('st-want').textContent=films.length-seen;
+  document.getElementById('st-views').textContent=films.reduce((a,f)=>a+f.views,0);
+}
+
+function toggleExpand(id){ expandedId=expandedId===id?null:id; renderList(); }
+function setWatched(id,s,e){ e.stopPropagation(); const f=films.find(x=>x.id===id); f.status=s; if(s==='want'){f.views=0;f.dateWatched='';}else if(f.views===0){f.views=1;f.dateWatched=new Date().toISOString().slice(0,7);} save(); renderList(); }
+function incViews(id,d,e){ e.stopPropagation(); const f=films.find(x=>x.id===id); f.views=Math.max(0,f.views+d); f.status=f.views>0?'seen':'want'; if(f.views>0&&!f.dateWatched)f.dateWatched=new Date().toISOString().slice(0,7); save(); renderList(); }
+function setRating(id,v,e){ e.stopPropagation(); const f=films.find(x=>x.id===id); f.rating=v; document.querySelectorAll(`#stars-${id} span`).forEach((s,i)=>s.className=i<v?'lit':''); }
+function saveEntry(id){ const f=films.find(x=>x.id===id); f.note=document.getElementById(`note-${id}`).value; f.dateWatched=document.getElementById(`date-${id}`).value; save(); const b=event.target;b.textContent='saved ✓';setTimeout(()=>b.textContent='save',1500); }
+function deleteFilm(id,e){ e.stopPropagation(); if(!confirm('Remove this film?'))return; films=films.filter(f=>f.id!==id); if(expandedId===id)expandedId=null; save(); renderList(); }
+function setFilter(el,f){ document.querySelectorAll('.seg-btn').forEach(e=>e.classList.remove('on')); el.classList.add('on'); currentFilter=f; renderList(); }
+
+async function loadRecs(forceRefresh=false){
+  const cached=localStorage.getItem('ht_recs_cache');
+  const cacheAge=localStorage.getItem('ht_recs_cache_time');
+  if(!forceRefresh&&cached&&cacheAge&&Date.now()-parseInt(cacheAge)<86400000){ recs=JSON.parse(cached); renderRecs(); return; }
+  document.getElementById('rec-list').innerHTML='<div class="loading-spinner"><i class="ti ti-loader spin" style="font-size:24px;display:block;margin-bottom:8px"></i>fetching fresh recs…</div>';
+  try{
+    const resp=await fetch(`${BACKEND}/api/recs`);
+    const data=await resp.json();
+    recs=data.map(r=>({...r,state:recs.find(x=>x.id===r.id)?.state||'pending'}));
+    localStorage.setItem('ht_recs_cache',JSON.stringify(recs));
+    localStorage.setItem('ht_recs_cache_time',Date.now().toString());
+  }catch(e){
+    recs=JSON.parse(localStorage.getItem('ht_recs')||'[]');
+    if(!recs.length){ document.getElementById('rec-list').innerHTML='<div class="loading-spinner" style="color:#A32D2D">backend not connected — add your Railway URL to config</div>'; return; }
+  }
+  renderRecs();
+}
+
+function renderRecs(){
+  const pending=recs.filter(r=>r.state==='pending');
+  document.getElementById('rec-badge').textContent=pending.length||'';
+  const rl=document.getElementById('rec-list'),re=document.getElementById('rec-empty');
+  if(!pending.length){ rl.innerHTML=''; re.style.display='block'; return; }
+  re.style.display='none';
+  rl.innerHTML=pending.map(r=>`
+    <div class="card">
+      <div class="card-title">${r.title} <span class="card-year">(${r.year})</span></div>
+      <div class="card-scores">${scoreChips(r.imdb,r.rt)}</div>
+      ${r.why?`<div class="card-why">${r.why}</div>`:''}
+      ${r.synopsis?`<div class="card-synopsis">${r.synopsis}</div>`:''}
+      ${r.notable?`<div class="card-notable">${r.notable}</div>`:''}
+      <div class="card-actions">
+        <button class="btn-approve" onclick="approveRec('${r.id}')"><i class="ti ti-plus"></i> add to list</button>
+        <button class="btn-reject" onclick="rejectRec('${r.id}')">not for me</button>
+        <a class="btn-imdb" href="https://www.imdb.com/find?q=${encodeURIComponent(r.title)}" target="_blank"><i class="ti ti-external-link"></i> IMDb</a>
+      </div>
+    </div>`).join('');
+}
+
+function approveRec(id){
+  const r=recs.find(x=>x.id===id); if(!r) return;
+  if(!films.find(f=>norm(f.title)===norm(r.title)))
+    films.push({id:nextId++,title:r.title,status:'want',views:0,dateWatched:'',note:'',rating:0,imdb:r.imdb||'—',rt:r.rt||'—',synopsis:r.synopsis||'',notable:r.notable||''});
+  r.state='approved'; save(); renderRecs(); renderList();
+}
+function rejectRec(id){ recs.find(x=>x.id===id).state='rejected'; save(); renderRecs(); }
+
+async function loadUpcoming(forceRefresh=false){
+  const cached=localStorage.getItem('ht_upcoming_cache');
+  const cacheAge=localStorage.getItem('ht_upcoming_cache_time');
+  if(!forceRefresh&&cached&&cacheAge&&Date.now()-parseInt(cacheAge)<86400000){ upcoming=JSON.parse(cached); renderUpcoming(); return; }
+  document.getElementById('up-list').innerHTML='<div class="loading-spinner"><i class="ti ti-loader spin" style="font-size:24px;display:block;margin-bottom:8px"></i>fetching upcoming releases…</div>';
+  try{
+    const resp=await fetch(`${BACKEND}/api/upcoming`);
+    const data=await resp.json();
+    upcoming=data.map(u=>({...u,added:upcoming.find(x=>x.id===u.id)?.added||false}));
+    localStorage.setItem('ht_upcoming_cache',JSON.stringify(upcoming));
+    localStorage.setItem('ht_upcoming_cache_time',Date.now().toString());
+  }catch(e){
+    upcoming=JSON.parse(localStorage.getItem('ht_upcoming')||'[]');
+    if(!upcoming.length){ document.getElementById('up-list').innerHTML='<div class="loading-spinner" style="color:#A32D2D">backend not connected — add your Railway URL to config</div>'; return; }
+  }
+  renderUpcoming();
+}
+
+function renderUpcoming(){
+  document.getElementById('up-list').innerHTML=upcoming.map(u=>`
+    <div class="card">
+      <div class="card-title">${u.title} <span class="card-year">(${u.year})</span><span class="up-date-badge">${u.releaseDate}</span></div>
+      <div class="card-scores">${scoreChips(u.imdb,u.rt)}</div>
+      ${u.synopsis?`<div class="card-synopsis">${u.synopsis}</div>`:''}
+      ${u.notable?`<div class="card-notable">${u.notable}</div>`:''}
+      <div class="card-actions">
+        ${u.added
+          ?`<button class="btn-watchlist added"><i class="ti ti-check"></i> on your list</button>`
+          :`<button class="btn-watchlist" onclick="addUpcoming('${u.id}')"><i class="ti ti-plus"></i> add to list</button>`}
+        <a class="btn-imdb" href="https://www.imdb.com/find?q=${encodeURIComponent(u.title)}" target="_blank"><i class="ti ti-external-link"></i> IMDb</a>
+      </div>
+    </div>`).join('');
+}
+
+function addUpcoming(id){
+  const u=upcoming.find(x=>x.id===id); if(!u) return;
+  if(!films.find(f=>norm(f.title)===norm(u.title)))
+    films.push({id:nextId++,title:u.title,status:'want',views:0,dateWatched:'',note:'',rating:0,imdb:u.imdb||'—',rt:u.rt||'—',synopsis:u.synopsis||'',notable:u.notable||''});
+  u.added=true; save(); renderUpcoming(); renderList();
+}
+
+function mainTab(el,tab){
+  document.querySelectorAll('.mt').forEach(e=>e.classList.remove('on'));
+  el.classList.add('on');
+  document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
+  document.getElementById('pg-'+tab).classList.add('on');
+  if(tab==='recs'&&!recs.length) loadRecs();
+  if(tab==='upcoming'&&!upcoming.length) loadUpcoming();
+}
+
+renderList();
+</script>
+</body>
+</html>
