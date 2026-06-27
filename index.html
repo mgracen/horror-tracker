@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Horror Tracker</title>
+<title>Horror Movie Tracker</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
@@ -152,7 +152,7 @@ body{background:var(--bg);color:var(--text);min-height:100vh}
 
 <div id="lock-screen">
   <i class="ti ti-eye lock-logo"></i>
-  <div class="lock-title">Horror Tracker</div>
+  <div class="lock-title">Horror Movie Tracker</div>
   <div class="lock-sub">personal horror watchlist</div>
   <div class="lock-form">
     <input type="password" id="pw-input" placeholder="password" onkeydown="if(event.key==='Enter')checkPassword()"/>
@@ -237,9 +237,9 @@ body{background:var(--bg);color:var(--text);min-height:100vh}
 
 <script>
 // ─── CONFIG — only edit these three lines ────────────────────────────────────
-const PASSWORD  = 'YOUR_PASSWORD';
-const OMDB_KEY  = 'YOUR_OMDB_KEY';
-const BACKEND   = 'YOUR_BACKEND_URL';
+const PASSWORD  = 'draculasucks';
+const OMDB_KEY  = 'd79a8a16';
+const BACKEND   = 'horrortrackerbackend-production.up.railway.app';
 // ─────────────────────────────────────────────────────────────────────────────
 
 function checkPassword(){
