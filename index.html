@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Horror Movie Tracker</title>
+<title>Horror Tracker</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
@@ -68,7 +68,8 @@ body{background:var(--bg);color:var(--text);min-height:100vh}
 .movie-row{border-bottom:0.5px solid var(--border)}
 .movie-main{display:flex;align-items:flex-start;gap:10px;padding:10px 16px;cursor:pointer}
 .movie-main:hover{background:var(--bg2)}
-.row-num{font-size:11px;color:var(--text3);width:22px;flex-shrink:0;padding-top:3px;text-align:right}
+.poster-img{width:36px;height:52px;border-radius:4px;object-fit:cover;flex-shrink:0;border:0.5px solid var(--border)}
+.poster-fallback{width:36px;height:52px;border-radius:4px;flex-shrink:0;border:0.5px solid var(--border);background:var(--bg2);display:flex;align-items:center;justify-content:center;color:var(--text3);font-size:15px}
 .row-info{flex:1;min-width:0}
 .row-title{font-size:13px;font-weight:500;color:var(--text);line-height:1.3}
 .row-meta{display:flex;gap:5px;flex-wrap:wrap;margin-top:3px;align-items:center}
@@ -85,7 +86,7 @@ body{background:var(--bg);color:var(--text);min-height:100vh}
 .watch-btn.seen{background:var(--green-bg);color:var(--green-text);border-color:var(--green-border)}
 .view-count{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--text2)}
 .vc-btn{width:18px;height:18px;border-radius:50%;border:0.5px solid var(--border);background:var(--bg2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:12px}
-.expand-panel{padding:0 16px 14px 48px;display:none}
+.expand-panel{padding:0 16px 14px 62px;display:none}
 .expand-panel.open{display:block}
 .synopsis-box{font-size:12px;color:var(--text2);line-height:1.6;margin-bottom:10px;padding:9px 11px;background:var(--bg2);border-left:2px solid var(--border2)}
 .notable-box{font-size:11px;color:var(--text3);font-style:italic;margin-bottom:10px}
@@ -124,7 +125,7 @@ body{background:var(--bg);color:var(--text);min-height:100vh}
 <body>
 <div class="app">
   <div class="topbar">
-    <div class="logo"><i class="ti ti-eye"></i> Horror Movie Tracker</div>
+    <div class="logo"><i class="ti ti-eye"></i> Horror Tracker</div>
     <div class="main-tabs">
       <div class="mt on" onclick="mainTab(this,'list')"><i class="ti ti-books"></i> my list</div>
       <div class="mt" onclick="mainTab(this,'recs')"><i class="ti ti-sparkles"></i> recs <span class="badge" id="rec-badge"></span></div>
@@ -190,6 +191,10 @@ body{background:var(--bg);color:var(--text);min-height:100vh}
     </div>
   </div>
 
+  <div style="text-align:center;padding:20px;font-size:11px;color:var(--text3)">
+    built by Eislinn · <a href="https://github.com/YOURUSERNAME/horror-tracker" style="color:var(--text3)">source</a>
+  </div>
+
 </div>
 
 <script>
@@ -223,6 +228,7 @@ async function fetchOMDB(title){
         synopsis: d.Plot       !== 'N/A' ? d.Plot           : null,
         director: d.Director   !== 'N/A' ? d.Director       : null,
         actors:   d.Actors     !== 'N/A' ? d.Actors         : null,
+        poster:   d.Poster     !== 'N/A' ? d.Poster         : null,
       };
     }
   }catch(e){}
@@ -253,7 +259,7 @@ async function addFilm(){
   btn.disabled=false;
   const notable=data?[data.director?`Dir. ${data.director}.`:'',data.actors?`Stars ${data.actors}.`:''].filter(Boolean).join(' '):'';
   films.push({id:nextId++,title:val,status:'want',views:0,dateWatched:'',note:'',rating:0,
-    imdb:data?.imdb||'—',rt:data?.rt||'—',synopsis:data?.synopsis||'',notable});
+    imdb:data?.imdb||'—',rt:data?.rt||'—',synopsis:data?.synopsis||'',notable,poster:data?.poster||null});
   save();
   showStatus(data?'success':'error',data?`"${val}" added with scores and synopsis.`:`"${val}" added — couldn't find data, check spelling.`);
   renderList();
@@ -265,6 +271,11 @@ function scoreChips(imdb,rt){
   const ib=imdb&&imdb!=='—'?`<span class="chip chip-imdb">IMDb ${imdb}</span>`:`<span class="chip chip-na">IMDb —</span>`;
   const rb=rt&&rt!=='—'?`<span class="chip ${rtClass(rt)}">RT ${rt}</span>`:`<span class="chip chip-na">RT —</span>`;
   return ib+rb;
+}
+
+function posterHtml(f){
+  if(f.poster) return `<img class="poster-img" src="${f.poster}" alt="${f.title} poster" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="poster-fallback" style="display:none"><i class="ti ti-movie" aria-hidden="true"></i></div>`;
+  return `<div class="poster-fallback"><i class="ti ti-movie" aria-hidden="true"></i></div>`;
 }
 
 function renderList(){
@@ -289,7 +300,7 @@ function renderList(){
       const stars=[1,2,3,4,5].map(n=>`<span class="${n<=f.rating?'lit':''}" onclick="setRating(${f.id},${n},event)">★</span>`).join('');
       return `<div class="movie-row">
         <div class="movie-main" onclick="toggleExpand(${f.id})">
-          <div class="row-num">${i+1}</div>
+          ${posterHtml(f)}
           <div class="row-info">
             <div class="row-title">${f.title}</div>
             <div class="row-meta">${scoreChips(f.imdb,f.rt)}${rb}${db}${nb}</div>
@@ -377,7 +388,7 @@ function renderRecs(){
 function approveRec(id){
   const r=recs.find(x=>x.id===id); if(!r) return;
   if(!films.find(f=>norm(f.title)===norm(r.title)))
-    films.push({id:nextId++,title:r.title,status:'want',views:0,dateWatched:'',note:'',rating:0,imdb:r.imdb||'—',rt:r.rt||'—',synopsis:r.synopsis||'',notable:r.notable||''});
+    films.push({id:nextId++,title:r.title,status:'want',views:0,dateWatched:'',note:'',rating:0,imdb:r.imdb||'—',rt:r.rt||'—',synopsis:r.synopsis||'',notable:r.notable||'',poster:null});
   r.state='approved'; save(); renderRecs(); renderList();
 }
 function rejectRec(id){ recs.find(x=>x.id===id).state='rejected'; save(); renderRecs(); }
@@ -419,7 +430,7 @@ function renderUpcoming(){
 function addUpcoming(id){
   const u=upcoming.find(x=>x.id===id); if(!u) return;
   if(!films.find(f=>norm(f.title)===norm(u.title)))
-    films.push({id:nextId++,title:u.title,status:'want',views:0,dateWatched:'',note:'',rating:0,imdb:u.imdb||'—',rt:u.rt||'—',synopsis:u.synopsis||'',notable:u.notable||''});
+    films.push({id:nextId++,title:u.title,status:'want',views:0,dateWatched:'',note:'',rating:0,imdb:u.imdb||'—',rt:u.rt||'—',synopsis:u.synopsis||'',notable:u.notable||'',poster:null});
   u.added=true; save(); renderUpcoming(); renderList();
 }
 
@@ -434,10 +445,8 @@ function mainTab(el,tab){
 
 renderList();
 </script>
-
-<div style="text-align:center;padding:20px;font-size:11px;color:#999">
-  built by Mike Gracen · <a href="https://github.com/mgracen/horror-tracker" style="color:#999">source</a>
+<div style="text-align:center;padding:20px;font-size:11px;color:var(--text3)">
+  built by Mike Gracen · <a href="https://github.com/mgracen/horror-tracker" style="color:var(--text3)">source</a>
 </div>
-
 </body>
 </html>
