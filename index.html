@@ -8,34 +8,61 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
 :root{
-  --red:#A32D2D;--red-dark:#791F1F;--red-light:#FCEBEB;--red-text:#791F1F;
-  --green-bg:#E1F5EE;--green-text:#085041;--green-border:#5DCAA5;
-  --amber-bg:#FAEEDA;--amber-text:#633806;--amber-border:#EF9F27;
-  --purple-bg:#EEEDFE;--purple-text:#3C3489;--purple-border:#AFA9EC;
-  --bg:#ffffff;--bg2:#f7f7f7;--bg3:#efefef;
-  --border:#e5e5e5;--border2:#d4d4d4;
-  --text:#111;--text2:#555;--text3:#999;
+  --accent:#8B0000;--accent-dark:#5a0000;--accent-light:#1a0000;--accent-text:#cc4444;
+  --bg:#111111;--bg2:#1a1a1a;--bg3:#222222;
+  --border:#2a2a2a;--border2:#333333;
+  --text:#eeeeee;--text2:#aaaaaa;--text3:#555555;
+  --green-bg:#0a1f16;--green-text:#5DCAA5;--green-border:#1D9E75;
+  --amber-bg:#1a1500;--amber-text:#ccaa44;--amber-border:#886600;
+  --purple-bg:#16122a;--purple-text:#9988dd;--purple-border:#443388;
   --radius:8px;--radius-sm:5px;
 }
-@media(prefers-color-scheme:dark){
-  :root{
-    --bg:#111;--bg2:#1a1a1a;--bg3:#222;
-    --border:#2a2a2a;--border2:#333;
-    --text:#eee;--text2:#aaa;--text3:#666;
-    --red-light:#2a1010;--amber-bg:#2a1f0a;--green-bg:#0a1f16;--purple-bg:#16143a;
-  }
+[data-theme="red"]{
+  --accent:#8B0000;--accent-dark:#5a0000;--accent-light:#1a0000;--accent-text:#cc4444;
+  --bg:#111111;--bg2:#1a1a1a;--bg3:#222222;--border:#2a2a2a;--border2:#333;--text:#eee;--text2:#aaa;--text3:#555;
 }
-body{background:var(--bg);color:var(--text);min-height:100vh}
+[data-theme="midnight"]{
+  --accent:#cc0000;--accent-dark:#990000;--accent-light:#1a0000;--accent-text:#ff5555;
+  --bg:#050505;--bg2:#0f0f0f;--bg3:#161616;--border:#1a1a1a;--border2:#222;--text:#eee;--text2:#888;--text3:#444;
+}
+[data-theme="green"]{
+  --accent:#3a7a00;--accent-dark:#285500;--accent-light:#0a1500;--accent-text:#88dd33;
+  --bg:#070d05;--bg2:#0d1509;--bg3:#131d0d;--border:#1a2a10;--border2:#243518;--text:#a8e890;--text2:#5a8040;--text3:#304520;
+  --amber-bg:#1a1500;--amber-text:#aaaa00;--amber-border:#666600;
+  --green-bg:#003300;--green-text:#44cc44;--green-border:#228822;
+}
+[data-theme="purple"]{
+  --accent:#534AB7;--accent-dark:#3C3489;--accent-light:#16122a;--accent-text:#9988dd;
+  --bg:#0d0b1a;--bg2:#131020;--bg3:#1a1628;--border:#2a2550;--border2:#363060;--text:#c8c4ff;--text2:#7766bb;--text3:#443388;
+  --amber-bg:#1a1500;--amber-text:#ccaa00;--amber-border:#887700;
+}
+[data-theme="bone"]{
+  --accent:#2c2c2a;--accent-dark:#111110;--accent-light:#e8e4d8;--accent-text:#2c2c2a;
+  --bg:#f5f0e8;--bg2:#ede8dc;--bg3:#e0dace;--border:#d3cfc0;--border2:#c3bfb0;--text:#2c2c2a;--text2:#5f5e5a;--text3:#888780;
+  --amber-bg:#faeeda;--amber-text:#633806;--amber-border:#EF9F27;
+  --green-bg:#e1f5ee;--green-text:#085041;--green-border:#5DCAA5;
+  --purple-bg:#eeedfe;--purple-text:#3C3489;--purple-border:#AFA9EC;
+}
+body{background:var(--bg);color:var(--text);min-height:100vh;transition:background 0.25s,color 0.25s}
 .app{max-width:900px;margin:0 auto;border:0.5px solid var(--border);min-height:100vh}
-.topbar{padding:11px 16px;border-bottom:0.5px solid var(--border);display:flex;align-items:center;gap:12px;background:var(--bg2);position:sticky;top:0;z-index:10}
+.topbar{padding:11px 16px;border-bottom:0.5px solid var(--border);display:flex;align-items:center;gap:10px;background:var(--bg2);position:sticky;top:0;z-index:10}
 .logo{font-size:15px;font-weight:600;display:flex;align-items:center;gap:7px}
-.logo i{font-size:19px;color:var(--red)}
-.main-tabs{display:flex;margin-left:auto;border:0.5px solid var(--border);border-radius:var(--radius-sm);overflow:hidden}
-.mt{padding:5px 11px;font-size:12px;cursor:pointer;color:var(--text2);border-right:0.5px solid var(--border);background:var(--bg);white-space:nowrap;display:flex;align-items:center;gap:5px}
+.logo i{font-size:19px;color:var(--accent)}
+.main-tabs{display:flex;border:0.5px solid var(--border);border-radius:var(--radius-sm);overflow:hidden}
+.mt{padding:5px 10px;font-size:12px;cursor:pointer;color:var(--text2);border-right:0.5px solid var(--border);background:var(--bg);white-space:nowrap;display:flex;align-items:center;gap:4px}
 .mt:last-child{border-right:none}
-.mt.on{background:var(--red);color:#fff}
-.badge{background:var(--red);color:#fff;font-size:10px;padding:1px 5px;border-radius:20px;min-width:16px;text-align:center}
-.mt.on .badge{background:rgba(255,255,255,0.3)}
+.mt.on{background:var(--accent);color:#fff}
+.badge{background:var(--accent);color:#fff;font-size:10px;padding:1px 5px;border-radius:20px;min-width:16px;text-align:center}
+.mt.on .badge{background:rgba(255,255,255,0.25)}
+.theme-btn{margin-left:auto;padding:4px 9px;font-size:11px;border-radius:var(--radius-sm);border:0.5px solid var(--border);background:var(--bg);color:var(--text2);cursor:pointer;display:flex;align-items:center;gap:4px;flex-shrink:0}
+.theme-btn:hover{background:var(--bg3)}
+.theme-panel{display:none;padding:10px 16px;border-bottom:0.5px solid var(--border);background:var(--bg2);gap:10px;flex-wrap:wrap;align-items:center}
+.theme-panel.open{display:flex}
+.tp-label{font-size:11px;color:var(--text3);flex-shrink:0}
+.swatch{width:22px;height:22px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:transform 0.1s,border-color 0.1s;flex-shrink:0}
+.swatch:hover{transform:scale(1.2)}
+.swatch.on{border-color:var(--text);transform:scale(1.2)}
+.theme-label{font-size:11px;color:var(--text3)}
 .pg{display:none}.pg.on{display:block}
 .stats-row{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:0.5px solid var(--border)}
 .stat{padding:10px 8px;text-align:center;border-right:0.5px solid var(--border)}
@@ -44,16 +71,16 @@ body{background:var(--bg);color:var(--text);min-height:100vh}
 .stat-l{font-size:10px;color:var(--text3);margin-top:1px}
 .add-area{padding:12px 16px;border-bottom:0.5px solid var(--border);display:flex;gap:8px}
 .add-area input{flex:1;padding:8px 12px;font-size:13px;border-radius:var(--radius-sm);border:0.5px solid var(--border2);background:var(--bg);color:var(--text)}
-.add-area input:focus{outline:none;border-color:var(--red)}
-.btn{padding:8px 14px;font-size:12px;border-radius:var(--radius-sm);cursor:pointer;display:flex;align-items:center;gap:5px;border:none;white-space:nowrap}
-.btn-red{background:var(--red);color:#fff}.btn-red:hover{background:var(--red-dark)}
-.btn-red:disabled{background:#999;cursor:not-allowed}
+.add-area input:focus{outline:none;border-color:var(--accent)}
+.btn-add{padding:8px 14px;font-size:12px;border-radius:var(--radius-sm);cursor:pointer;display:flex;align-items:center;gap:5px;border:none;white-space:nowrap;background:var(--accent);color:#fff}
+.btn-add:hover{background:var(--accent-dark)}
+.btn-add:disabled{background:var(--text3);cursor:not-allowed}
 .status-bar{display:none;font-size:11px;padding:7px 16px;border-bottom:0.5px solid var(--border);align-items:center;gap:6px}
 .status-bar.show{display:flex}
 .status-bar.fetching{background:var(--bg2);color:var(--text2)}
 .status-bar.dupe{background:var(--amber-bg);color:var(--amber-text)}
 .status-bar.success{background:var(--green-bg);color:var(--green-text)}
-.status-bar.error{background:var(--red-light);color:var(--red-text)}
+.status-bar.error{background:var(--accent-light);color:var(--accent-text)}
 @keyframes spin{to{transform:rotate(360deg)}}
 .spin{animation:spin 1s linear infinite;display:inline-block}
 .filter-row{display:flex;gap:8px;padding:9px 16px;border-bottom:0.5px solid var(--border);flex-wrap:wrap;align-items:center}
@@ -61,10 +88,16 @@ body{background:var(--bg);color:var(--text);min-height:100vh}
 .seg{display:flex;border:0.5px solid var(--border);border-radius:var(--radius-sm);overflow:hidden}
 .seg-btn{padding:4px 10px;font-size:12px;cursor:pointer;color:var(--text2);border-right:0.5px solid var(--border);background:var(--bg)}
 .seg-btn:last-child{border-right:none}
-.seg-btn.on{background:var(--red);color:#fff}
+.seg-btn.on{background:var(--accent);color:#fff}
 .search-wrap{flex:1;position:relative;min-width:90px}
 .search-wrap i{position:absolute;left:7px;top:50%;transform:translateY(-50%);font-size:13px;color:var(--text3);pointer-events:none}
 .search-wrap input{width:100%;padding:4px 8px 4px 24px;font-size:12px;border-radius:var(--radius-sm);border:0.5px solid var(--border);background:var(--bg);color:var(--text)}
+.sort-row{display:flex;gap:8px;padding:7px 16px;border-bottom:0.5px solid var(--border);align-items:center;background:var(--bg2)}
+.sort-label{font-size:11px;color:var(--text3);flex-shrink:0}
+select{font-size:12px;padding:4px 8px;border-radius:var(--radius-sm);border:0.5px solid var(--border);background:var(--bg);color:var(--text);cursor:pointer}
+.export-btn{padding:4px 10px;font-size:11px;border-radius:var(--radius-sm);cursor:pointer;border:0.5px solid var(--border);background:var(--bg);color:var(--text2);display:flex;align-items:center;gap:4px}
+.export-btn:hover{background:var(--bg3)}
+.ml-auto{margin-left:auto;display:flex;gap:6px}
 .movie-row{border-bottom:0.5px solid var(--border)}
 .movie-main{display:flex;align-items:flex-start;gap:10px;padding:10px 16px;cursor:pointer}
 .movie-main:hover{background:var(--bg2)}
@@ -76,7 +109,7 @@ body{background:var(--bg);color:var(--text);min-height:100vh}
 .chip{font-size:10px;padding:1px 6px;border-radius:20px;border:0.5px solid;white-space:nowrap}
 .chip-imdb{background:var(--amber-bg);color:var(--amber-text);border-color:var(--amber-border)}
 .chip-fresh{background:var(--green-bg);color:var(--green-text);border-color:var(--green-border)}
-.chip-rotten{background:var(--red-light);color:var(--red-text);border-color:#f09595}
+.chip-rotten{background:var(--accent-light);color:var(--accent-text);border-color:var(--accent)}
 .chip-na{background:var(--bg2);color:var(--text3);border-color:var(--border)}
 .chip-note{background:var(--purple-bg);color:var(--purple-text);border-color:var(--purple-border);max-width:160px;overflow:hidden;text-overflow:ellipsis}
 .chip-date{background:var(--bg2);color:var(--text2);border-color:var(--border)}
@@ -85,10 +118,10 @@ body{background:var(--bg);color:var(--text);min-height:100vh}
 .watch-btn.want{border-color:var(--border2);color:var(--text2)}
 .watch-btn.seen{background:var(--green-bg);color:var(--green-text);border-color:var(--green-border)}
 .view-count{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--text2)}
-.vc-btn{width:18px;height:18px;border-radius:50%;border:0.5px solid var(--border);background:var(--bg2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:12px}
+.vc-btn{width:18px;height:18px;border-radius:50%;border:0.5px solid var(--border);background:var(--bg2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--text2)}
 .expand-panel{padding:0 16px 14px 62px;display:none}
 .expand-panel.open{display:block}
-.synopsis-box{font-size:12px;color:var(--text2);line-height:1.6;margin-bottom:10px;padding:9px 11px;background:var(--bg2);border-left:2px solid var(--border2)}
+.synopsis-box{font-size:12px;color:var(--text2);line-height:1.6;margin-bottom:10px;padding:9px 11px;background:var(--bg2);border-left:2px solid var(--accent)}
 .notable-box{font-size:11px;color:var(--text3);font-style:italic;margin-bottom:10px}
 .note-row{display:flex;gap:7px;align-items:center;margin-bottom:7px}
 .note-row input{flex:1;font-size:12px;padding:5px 9px;border-radius:var(--radius-sm);border:0.5px solid var(--border);background:var(--bg);color:var(--text)}
@@ -97,11 +130,11 @@ body{background:var(--bg);color:var(--text);min-height:100vh}
 .date-row input{font-size:12px;padding:5px 9px;border-radius:var(--radius-sm);border:0.5px solid var(--border);background:var(--bg);color:var(--text)}
 .my-stars span{font-size:18px;cursor:pointer;color:var(--border2)}
 .my-stars span.lit{color:var(--amber-border)}
-.btn-sm{padding:5px 10px;font-size:11px;background:var(--red);color:#fff;border:none;border-radius:var(--radius-sm);cursor:pointer}
-.del-btn{font-size:11px;color:var(--red-text);cursor:pointer;border:none;background:none;padding:2px 4px}
+.btn-sm{padding:5px 10px;font-size:11px;background:var(--accent);color:#fff;border:none;border-radius:var(--radius-sm);cursor:pointer}
+.del-btn{font-size:11px;color:var(--accent-text);cursor:pointer;border:none;background:none;padding:2px 4px}
 .del-btn:hover{text-decoration:underline}
 .empty-state{text-align:center;padding:48px 20px;color:var(--text3);font-size:13px}
-.empty-state i{font-size:36px;display:block;margin-bottom:10px;color:var(--border2)}
+.empty-state i{font-size:36px;display:block;margin-bottom:10px;color:var(--text3)}
 .section-header{padding:10px 16px;border-bottom:0.5px solid var(--border);background:var(--bg2);font-size:11px;color:var(--text2);display:flex;align-items:center;gap:6px}
 .card{padding:13px 16px;border-bottom:0.5px solid var(--border)}
 .card-title{font-size:13px;font-weight:500;color:var(--text);margin-bottom:4px}
@@ -111,15 +144,17 @@ body{background:var(--bg);color:var(--text);min-height:100vh}
 .card-synopsis{font-size:12px;color:var(--text2);line-height:1.5;margin-bottom:5px}
 .card-notable{font-size:11px;color:var(--text3);font-style:italic;margin-bottom:8px}
 .card-actions{display:flex;gap:7px;align-items:center;flex-wrap:wrap}
-.btn-approve{padding:5px 11px;font-size:11px;background:#085041;color:#fff;border:none;border-radius:var(--radius-sm);cursor:pointer;display:flex;align-items:center;gap:4px}
+.btn-approve{padding:5px 11px;font-size:11px;background:var(--green-border);color:#fff;border:none;border-radius:var(--radius-sm);cursor:pointer;display:flex;align-items:center;gap:4px}
 .btn-reject{padding:5px 11px;font-size:11px;background:var(--bg2);color:var(--text2);border:0.5px solid var(--border);border-radius:var(--radius-sm);cursor:pointer}
 .btn-imdb{padding:5px 10px;font-size:11px;color:var(--purple-text);border:0.5px solid var(--purple-border);background:var(--purple-bg);border-radius:var(--radius-sm);text-decoration:none;display:inline-flex;align-items:center;gap:4px}
-.up-date-badge{font-size:10px;padding:1px 7px;border-radius:20px;background:var(--red-light);color:var(--red-text);border:0.5px solid #f09595;white-space:nowrap;margin-left:6px}
-.btn-watchlist{padding:5px 11px;font-size:11px;background:var(--red);color:#fff;border:none;border-radius:var(--radius-sm);cursor:pointer;display:flex;align-items:center;gap:4px}
+.up-date-badge{font-size:10px;padding:1px 7px;border-radius:20px;background:var(--accent-light);color:var(--accent-text);border:0.5px solid var(--accent);white-space:nowrap;margin-left:6px}
+.btn-watchlist{padding:5px 11px;font-size:11px;background:var(--accent);color:#fff;border:none;border-radius:var(--radius-sm);cursor:pointer;display:flex;align-items:center;gap:4px}
 .btn-watchlist.added{background:var(--green-bg);color:var(--green-text);border:0.5px solid var(--green-border);cursor:default}
 .loading-spinner{text-align:center;padding:40px;color:var(--text3);font-size:13px}
 .refresh-btn{margin-left:auto;padding:3px 10px;font-size:11px;background:var(--bg);border:0.5px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;color:var(--text2);display:flex;align-items:center;gap:4px}
 .refresh-btn:hover{background:var(--bg2)}
+.footer{text-align:center;padding:20px;font-size:11px;color:var(--text3)}
+.footer a{color:var(--text3)}
 </style>
 </head>
 <body>
@@ -131,6 +166,17 @@ body{background:var(--bg);color:var(--text);min-height:100vh}
       <div class="mt" onclick="mainTab(this,'recs')"><i class="ti ti-sparkles"></i> recs <span class="badge" id="rec-badge"></span></div>
       <div class="mt" onclick="mainTab(this,'upcoming')"><i class="ti ti-calendar"></i> upcoming</div>
     </div>
+    <button class="theme-btn" onclick="toggleThemePanel()"><i class="ti ti-palette" aria-hidden="true"></i> theme</button>
+  </div>
+
+  <div class="theme-panel" id="theme-panel">
+    <span class="tp-label">theme:</span>
+    <div class="swatch on" data-t="red"      style="background:#8B0000"                          title="blood red"          onclick="setTheme('red',this)"></div>
+    <div class="swatch"    data-t="midnight" style="background:#050505;border:2px solid #cc0000" title="midnight"           onclick="setTheme('midnight',this)"></div>
+    <div class="swatch"    data-t="green"    style="background:#3a7a00"                           title="frankenstein green" onclick="setTheme('green',this)"></div>
+    <div class="swatch"    data-t="purple"   style="background:#534AB7"                           title="deep purple"        onclick="setTheme('purple',this)"></div>
+    <div class="swatch"    data-t="bone"     style="background:#f5f0e8;border:2px solid #2c2c2a" title="bone"               onclick="setTheme('bone',this)"></div>
+    <span class="theme-label" id="theme-label">blood red</span>
   </div>
 
   <div id="pg-list" class="pg on">
@@ -142,12 +188,9 @@ body{background:var(--bg);color:var(--text);min-height:100vh}
     </div>
     <div class="add-area">
       <input type="text" id="add-input" placeholder="type a film title and hit enter — scores & synopsis auto-load…" onkeydown="if(event.key==='Enter')addFilm()"/>
-      <button class="btn btn-red" id="add-btn" onclick="addFilm()"><i class="ti ti-plus"></i> add</button>
+      <button class="btn-add" id="add-btn" onclick="addFilm()"><i class="ti ti-plus" aria-hidden="true"></i> add</button>
     </div>
-    <div class="status-bar" id="status-bar">
-      <i class="ti ti-refresh spin" id="status-icon"></i>
-      <span id="status-msg"></span>
-    </div>
+    <div class="status-bar" id="status-bar"><i class="ti ti-refresh spin" id="status-icon"></i><span id="status-msg"></span></div>
     <div class="filter-row">
       <span class="fl">show:</span>
       <div class="seg">
@@ -155,176 +198,136 @@ body{background:var(--bg);color:var(--text);min-height:100vh}
         <div class="seg-btn" onclick="setFilter(this,'want')">to watch</div>
         <div class="seg-btn" onclick="setFilter(this,'seen')">watched</div>
       </div>
-      <div class="search-wrap">
-        <i class="ti ti-search"></i>
-        <input type="text" id="search-input" placeholder="search your list…" oninput="renderList()"/>
+      <div class="search-wrap"><i class="ti ti-search" aria-hidden="true"></i><input type="text" id="search-input" placeholder="search your list…" oninput="renderList()"/></div>
+    </div>
+    <div class="sort-row">
+      <span class="sort-label">sort:</span>
+      <select id="sort-select" onchange="renderList()">
+        <option value="added">date added</option>
+        <option value="alpha">a to z</option>
+        <option value="rating">your rating</option>
+        <option value="imdb">IMDb score</option>
+        <option value="watched">date watched</option>
+        <option value="views">most viewed</option>
+      </select>
+      <div class="ml-auto">
+        <button class="export-btn" onclick="exportCSV()"><i class="ti ti-download" aria-hidden="true"></i> CSV</button>
+        <button class="export-btn" onclick="exportPDF()"><i class="ti ti-file-text" aria-hidden="true"></i> PDF</button>
       </div>
     </div>
     <div id="movie-list"></div>
-    <div class="empty-state" id="list-empty" style="display:none">
-      <i class="ti ti-eye-off"></i>nothing here yet — add a film above
-    </div>
+    <div class="empty-state" id="list-empty" style="display:none"><i class="ti ti-eye-off" aria-hidden="true"></i>nothing here yet — add a film above</div>
   </div>
 
   <div id="pg-recs" class="pg">
-    <div class="section-header">
-      <i class="ti ti-info-circle"></i>
-      sourced from r/horror, Bloody Disgusting, Fangoria &amp; Fantasia — filtered to your taste
-      <button class="refresh-btn" onclick="loadRecs(true)"><i class="ti ti-refresh"></i> refresh</button>
-    </div>
-    <div id="rec-list">
-      <div class="loading-spinner"><i class="ti ti-loader spin" style="font-size:24px;display:block;margin-bottom:8px"></i>loading recs…</div>
-    </div>
-    <div class="empty-state" id="rec-empty" style="display:none">
-      <i class="ti ti-check"></i>all reviewed — hit refresh for fresh picks
-    </div>
+    <div class="section-header"><i class="ti ti-info-circle" aria-hidden="true"></i> sourced from r/horror, Bloody Disgusting, Fangoria &amp; Fantasia — filtered to your taste<button class="refresh-btn" onclick="loadRecs(true)"><i class="ti ti-refresh" aria-hidden="true"></i> refresh</button></div>
+    <div id="rec-list"><div class="loading-spinner"><i class="ti ti-loader spin" style="font-size:24px;display:block;margin-bottom:8px" aria-hidden="true"></i>loading recs…</div></div>
+    <div class="empty-state" id="rec-empty" style="display:none"><i class="ti ti-check" aria-hidden="true"></i>all reviewed — hit refresh for fresh picks</div>
   </div>
 
   <div id="pg-upcoming" class="pg">
-    <div class="section-header">
-      <i class="ti ti-calendar"></i>
-      confirmed upcoming releases — festival picks &amp; trade sources
-      <button class="refresh-btn" onclick="loadUpcoming(true)"><i class="ti ti-refresh"></i> refresh</button>
-    </div>
-    <div id="up-list">
-      <div class="loading-spinner"><i class="ti ti-loader spin" style="font-size:24px;display:block;margin-bottom:8px"></i>loading upcoming…</div>
-    </div>
+    <div class="section-header"><i class="ti ti-calendar" aria-hidden="true"></i> confirmed upcoming releases — festival picks &amp; trade sources<button class="refresh-btn" onclick="loadUpcoming(true)"><i class="ti ti-refresh" aria-hidden="true"></i> refresh</button></div>
+    <div id="up-list"><div class="loading-spinner"><i class="ti ti-loader spin" style="font-size:24px;display:block;margin-bottom:8px" aria-hidden="true"></i>loading upcoming…</div></div>
   </div>
 
+  <div class="footer">built by Eislinn · <a href="https://github.com/YOURUSERNAME/horror-tracker">source</a></div>
 </div>
 
 <script>
-// ─── CONFIG — only edit these two lines ──────────────────────────────────────
-const OMDB_KEY = '58909077';
-const BACKEND  = 'https://horrortrackerbackend-production.up.railway.app';
-// ─────────────────────────────────────────────────────────────────────────────
+const OMDB_KEY='58909077';
+const BACKEND='https://horrortrackerbackend-production.up.railway.app';
 
-let films    = JSON.parse(localStorage.getItem('ht_films')   || '[]');
-let recs     = JSON.parse(localStorage.getItem('ht_recs')    || '[]');
-let upcoming = JSON.parse(localStorage.getItem('ht_upcoming')|| '[]');
-let nextId   = Math.max(0, ...films.map(f=>f.id||0)) + 1;
-let expandedId = null;
-let currentFilter = 'all';
-
-function save(){
-  localStorage.setItem('ht_films',    JSON.stringify(films));
-  localStorage.setItem('ht_recs',     JSON.stringify(recs));
-  localStorage.setItem('ht_upcoming', JSON.stringify(upcoming));
+const THEME_NAMES={red:'blood red',midnight:'midnight',green:'frankenstein green',purple:'deep purple',bone:'bone'};
+function setTheme(t,el){
+  document.documentElement.setAttribute('data-theme',t);
+  localStorage.setItem('ht_theme',t);
+  document.querySelectorAll('.swatch').forEach(s=>s.classList.remove('on'));
+  (el||document.querySelector(`[data-t="${t}"]`))?.classList.add('on');
+  document.getElementById('theme-label').textContent=THEME_NAMES[t]||t;
 }
+function toggleThemePanel(){document.getElementById('theme-panel').classList.toggle('open');}
+setTheme(localStorage.getItem('ht_theme')||'red');
+
+let films=JSON.parse(localStorage.getItem('ht_films')||'[]');
+let recs=JSON.parse(localStorage.getItem('ht_recs')||'[]');
+let upcoming=JSON.parse(localStorage.getItem('ht_upcoming')||'[]');
+let nextId=Math.max(0,...films.map(f=>f.id||0))+1;
+let expandedId=null,currentFilter='all';
+
+function save(){localStorage.setItem('ht_films',JSON.stringify(films));localStorage.setItem('ht_recs',JSON.stringify(recs));localStorage.setItem('ht_upcoming',JSON.stringify(upcoming));}
 
 async function fetchOMDB(title){
   try{
-    const r = await fetch(`https://www.omdbapi.com/?t=${encodeURIComponent(title)}&apikey=${OMDB_KEY}`);
-    const d = await r.json();
+    const r=await fetch(`https://www.omdbapi.com/?t=${encodeURIComponent(title)}&apikey=${OMDB_KEY}`);
+    const d=await r.json();
     if(d.Response==='True'){
-      const rt = d.Ratings?.find(x=>x.Source==='Rotten Tomatoes');
-      return{
-        imdb:     d.imdbRating !== 'N/A' ? d.imdbRating+'★' : null,
-        rt:       rt ? rt.Value : null,
-        synopsis: d.Plot       !== 'N/A' ? d.Plot           : null,
-        director: d.Director   !== 'N/A' ? d.Director       : null,
-        actors:   d.Actors     !== 'N/A' ? d.Actors         : null,
-        poster:   d.Poster     !== 'N/A' ? d.Poster         : null,
-      };
+      const rt=d.Ratings?.find(x=>x.Source==='Rotten Tomatoes');
+      return{imdb:d.imdbRating!=='N/A'?d.imdbRating+'★':null,rt:rt?rt.Value:null,synopsis:d.Plot!=='N/A'?d.Plot:null,director:d.Director!=='N/A'?d.Director:null,actors:d.Actors!=='N/A'?d.Actors:null,poster:d.Poster!=='N/A'?d.Poster:null};
     }
   }catch(e){}
   return null;
 }
 
 function showStatus(type,msg){
-  const bar=document.getElementById('status-bar');
-  const icon=document.getElementById('status-icon');
-  const txt=document.getElementById('status-msg');
+  const bar=document.getElementById('status-bar'),icon=document.getElementById('status-icon'),txt=document.getElementById('status-msg');
   bar.className='status-bar show '+type;
-  const icons={fetching:'ti-refresh spin',dupe:'ti-alert-triangle',success:'ti-check',error:'ti-alert-circle'};
-  icon.className='ti '+(icons[type]||'ti-info-circle');
+  icon.className='ti '+{fetching:'ti-refresh spin',dupe:'ti-alert-triangle',success:'ti-check',error:'ti-alert-circle'}[type];
   txt.textContent=msg;
-  if(type!=='fetching') setTimeout(()=>bar.classList.remove('show'),3500);
+  if(type!=='fetching')setTimeout(()=>bar.classList.remove('show'),3500);
 }
 
 async function addFilm(){
-  const inp=document.getElementById('add-input');
-  const val=inp.value.trim(); if(!val) return;
+  const inp=document.getElementById('add-input'),val=inp.value.trim();if(!val)return;
   const norm=s=>s.toLowerCase().replace(/[^a-z0-9]/g,'');
   const dupe=films.find(f=>norm(f.title)===norm(val));
-  if(dupe){ showStatus('dupe',`"${dupe.title}" is already on your list (${dupe.status==='seen'?'watched':'to watch'}).`); inp.value=''; return; }
-  const btn=document.getElementById('add-btn');
-  btn.disabled=true; inp.value='';
+  if(dupe){showStatus('dupe',`"${dupe.title}" is already on your list (${dupe.status==='seen'?'watched':'to watch'}).`);inp.value='';return;}
+  const btn=document.getElementById('add-btn');btn.disabled=true;inp.value='';
   showStatus('fetching',`looking up "${val}"…`);
-  const data=await fetchOMDB(val);
-  btn.disabled=false;
+  const data=await fetchOMDB(val);btn.disabled=false;
   const notable=data?[data.director?`Dir. ${data.director}.`:'',data.actors?`Stars ${data.actors}.`:''].filter(Boolean).join(' '):'';
-  films.push({id:nextId++,title:val,status:'want',views:0,dateWatched:'',note:'',rating:0,
-    imdb:data?.imdb||'—',rt:data?.rt||'—',synopsis:data?.synopsis||'',notable,poster:data?.poster||null});
-  save();
-  showStatus(data?'success':'error',data?`"${val}" added with scores and synopsis.`:`"${val}" added — couldn't find data, check spelling.`);
-  renderList();
+  films.push({id:nextId++,title:val,status:'want',views:0,dateWatched:'',note:'',rating:0,imdb:data?.imdb||'—',rt:data?.rt||'—',synopsis:data?.synopsis||'',notable,poster:data?.poster||null});
+  save();showStatus(data?'success':'error',data?`"${val}" added with scores and synopsis.`:`"${val}" added — couldn't find data, check spelling.`);renderList();
 }
 
 const norm=s=>s.toLowerCase().replace(/[^a-z0-9]/g,'');
-function rtClass(rt){ if(!rt||rt==='—')return'chip-na'; return parseInt(rt)>=60?'chip-fresh':'chip-rotten'; }
+function rtClass(rt){if(!rt||rt==='—')return'chip-na';return parseInt(rt)>=60?'chip-fresh':'chip-rotten';}
 function scoreChips(imdb,rt){
-  const ib=imdb&&imdb!=='—'?`<span class="chip chip-imdb">IMDb ${imdb}</span>`:`<span class="chip chip-na">IMDb —</span>`;
-  const rb=rt&&rt!=='—'?`<span class="chip ${rtClass(rt)}">RT ${rt}</span>`:`<span class="chip chip-na">RT —</span>`;
-  return ib+rb;
+  return(imdb&&imdb!=='—'?`<span class="chip chip-imdb">IMDb ${imdb}</span>`:`<span class="chip chip-na">IMDb —</span>`)+(rt&&rt!=='—'?`<span class="chip ${rtClass(rt)}">RT ${rt}</span>`:`<span class="chip chip-na">RT —</span>`);
 }
-
 function posterHtml(f){
-  if(f.poster) return `<img class="poster-img" src="${f.poster}" alt="${f.title} poster" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="poster-fallback" style="display:none"><i class="ti ti-movie" aria-hidden="true"></i></div>`;
-  return `<div class="poster-fallback"><i class="ti ti-movie" aria-hidden="true"></i></div>`;
+  if(f.poster)return`<img class="poster-img" src="${f.poster}" alt="${f.title} poster" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="poster-fallback" style="display:none"><i class="ti ti-movie" aria-hidden="true"></i></div>`;
+  return`<div class="poster-fallback"><i class="ti ti-movie" aria-hidden="true"></i></div>`;
+}
+function getSorted(list){
+  const sort=document.getElementById('sort-select').value;
+  return[...list].sort((a,b)=>{
+    if(sort==='alpha')return a.title.localeCompare(b.title);
+    if(sort==='rating')return(b.rating||0)-(a.rating||0);
+    if(sort==='imdb')return(parseFloat(b.imdb)||0)-(parseFloat(a.imdb)||0);
+    if(sort==='watched')return(b.dateWatched||'').localeCompare(a.dateWatched||'');
+    if(sort==='views')return(b.views||0)-(a.views||0);
+    return(b.id||0)-(a.id||0);
+  });
 }
 
 function renderList(){
   const q=(document.getElementById('search-input')?.value||'').toLowerCase();
-  const list=films.filter(f=>{
+  let list=getSorted(films.filter(f=>{
     const fm=currentFilter==='all'||(currentFilter==='want'&&f.status==='want')||(currentFilter==='seen'&&f.status==='seen');
     return fm&&(!q||f.title.toLowerCase().includes(q));
-  });
-  const ml=document.getElementById('movie-list');
-  const em=document.getElementById('list-empty');
-  if(!list.length){ ml.innerHTML=''; em.style.display='block'; }
+  }));
+  const ml=document.getElementById('movie-list'),em=document.getElementById('list-empty');
+  if(!list.length){ml.innerHTML='';em.style.display='block';}
   else{
     em.style.display='none';
-    ml.innerHTML=list.map((f,i)=>{
+    ml.innerHTML=list.map(f=>{
       const isExp=expandedId===f.id;
       const nb=f.note?`<span class="chip chip-note" title="${f.note}">📝 ${f.note}</span>`:'';
       const db=f.dateWatched?`<span class="chip chip-date">${f.dateWatched}</span>`:'';
       const rb=f.rating?`<span class="chip chip-imdb">${'★'.repeat(f.rating)}${'☆'.repeat(5-f.rating)}</span>`:'';
-      const wb=f.status==='want'
-        ?`<button class="watch-btn want" onclick="setWatched(${f.id},'seen',event)">+ mark watched</button>`
-        :`<button class="watch-btn seen" onclick="setWatched(${f.id},'want',event)">✓ watched</button>`;
+      const wb=f.status==='want'?`<button class="watch-btn want" onclick="setWatched(${f.id},'seen',event)">+ mark watched</button>`:`<button class="watch-btn seen" onclick="setWatched(${f.id},'want',event)">✓ watched</button>`;
       const stars=[1,2,3,4,5].map(n=>`<span class="${n<=f.rating?'lit':''}" onclick="setRating(${f.id},${n},event)">★</span>`).join('');
-      return `<div class="movie-row">
-        <div class="movie-main" onclick="toggleExpand(${f.id})">
-          ${posterHtml(f)}
-          <div class="row-info">
-            <div class="row-title">${f.title}</div>
-            <div class="row-meta">${scoreChips(f.imdb,f.rt)}${rb}${db}${nb}</div>
-          </div>
-          <div class="row-right">
-            ${wb}
-            <div class="view-count">
-              <div class="vc-btn" onclick="incViews(${f.id},-1,event)">−</div>
-              <span>${f.views}×</span>
-              <div class="vc-btn" onclick="incViews(${f.id},1,event)">+</div>
-            </div>
-            <button class="del-btn" onclick="deleteFilm(${f.id},event)">remove</button>
-          </div>
-        </div>
-        <div class="expand-panel${isExp?' open':''}">
-          ${f.synopsis?`<div class="synopsis-box">${f.synopsis}</div>`:''}
-          ${f.notable?`<div class="notable-box">${f.notable}</div>`:''}
-          <div class="note-row">
-            <div class="my-stars" id="stars-${f.id}">${stars}</div>
-            <input type="text" id="note-${f.id}" placeholder="your note…" value="${f.note||''}" onclick="event.stopPropagation()"/>
-          </div>
-          <div class="date-row">
-            <label>last watched</label>
-            <input type="month" id="date-${f.id}" value="${f.dateWatched||''}" onclick="event.stopPropagation()"/>
-            <button class="btn-sm" onclick="saveEntry(${f.id});event.stopPropagation()">save</button>
-          </div>
-        </div>
-      </div>`;
+      return`<div class="movie-row"><div class="movie-main" onclick="toggleExpand(${f.id})">${posterHtml(f)}<div class="row-info"><div class="row-title">${f.title}</div><div class="row-meta">${scoreChips(f.imdb,f.rt)}${rb}${db}${nb}</div></div><div class="row-right">${wb}<div class="view-count"><div class="vc-btn" onclick="incViews(${f.id},-1,event)">−</div><span>${f.views}×</span><div class="vc-btn" onclick="incViews(${f.id},1,event)">+</div></div><button class="del-btn" onclick="deleteFilm(${f.id},event)">remove</button></div></div><div class="expand-panel${isExp?' open':''}"><div class="synopsis-box">${f.synopsis||'no synopsis — try removing and re-adding the film'}</div>${f.notable?`<div class="notable-box">${f.notable}</div>`:''}<div class="note-row"><div class="my-stars" id="stars-${f.id}">${stars}</div><input type="text" id="note-${f.id}" placeholder="your note…" value="${f.note||''}" onclick="event.stopPropagation()"/></div><div class="date-row"><label>last watched</label><input type="month" id="date-${f.id}" value="${f.dateWatched||''}" onclick="event.stopPropagation()"/><button class="btn-sm" onclick="saveEntry(${f.id});event.stopPropagation()">save</button></div></div></div>`;
     }).join('');
   }
   const seen=films.filter(f=>f.status==='seen').length;
@@ -334,115 +337,76 @@ function renderList(){
   document.getElementById('st-views').textContent=films.reduce((a,f)=>a+f.views,0);
 }
 
-function toggleExpand(id){ expandedId=expandedId===id?null:id; renderList(); }
-function setWatched(id,s,e){ e.stopPropagation(); const f=films.find(x=>x.id===id); f.status=s; if(s==='want'){f.views=0;f.dateWatched='';}else if(f.views===0){f.views=1;f.dateWatched=new Date().toISOString().slice(0,7);} save(); renderList(); }
-function incViews(id,d,e){ e.stopPropagation(); const f=films.find(x=>x.id===id); f.views=Math.max(0,f.views+d); f.status=f.views>0?'seen':'want'; if(f.views>0&&!f.dateWatched)f.dateWatched=new Date().toISOString().slice(0,7); save(); renderList(); }
-function setRating(id,v,e){ e.stopPropagation(); const f=films.find(x=>x.id===id); f.rating=v; document.querySelectorAll(`#stars-${id} span`).forEach((s,i)=>s.className=i<v?'lit':''); }
-function saveEntry(id){ const f=films.find(x=>x.id===id); f.note=document.getElementById(`note-${id}`).value; f.dateWatched=document.getElementById(`date-${id}`).value; save(); const b=event.target;b.textContent='saved ✓';setTimeout(()=>b.textContent='save',1500); }
-function deleteFilm(id,e){ e.stopPropagation(); if(!confirm('Remove this film?'))return; films=films.filter(f=>f.id!==id); if(expandedId===id)expandedId=null; save(); renderList(); }
-function setFilter(el,f){ document.querySelectorAll('.seg-btn').forEach(e=>e.classList.remove('on')); el.classList.add('on'); currentFilter=f; renderList(); }
+function toggleExpand(id){expandedId=expandedId===id?null:id;renderList();}
+function setWatched(id,s,e){e.stopPropagation();const f=films.find(x=>x.id===id);f.status=s;if(s==='want'){f.views=0;f.dateWatched='';}else if(f.views===0){f.views=1;f.dateWatched=new Date().toISOString().slice(0,7);}save();renderList();}
+function incViews(id,d,e){e.stopPropagation();const f=films.find(x=>x.id===id);f.views=Math.max(0,f.views+d);f.status=f.views>0?'seen':'want';if(f.views>0&&!f.dateWatched)f.dateWatched=new Date().toISOString().slice(0,7);save();renderList();}
+function setRating(id,v,e){e.stopPropagation();const f=films.find(x=>x.id===id);f.rating=v;document.querySelectorAll(`#stars-${id} span`).forEach((s,i)=>s.className=i<v?'lit':'');}
+function saveEntry(id){const f=films.find(x=>x.id===id);f.note=document.getElementById(`note-${id}`).value;f.dateWatched=document.getElementById(`date-${id}`).value;save();const b=event.target;b.textContent='saved ✓';setTimeout(()=>b.textContent='save',1500);}
+function deleteFilm(id,e){e.stopPropagation();if(!confirm('Remove this film?'))return;films=films.filter(f=>f.id!==id);if(expandedId===id)expandedId=null;save();renderList();}
+function setFilter(el,f){document.querySelectorAll('.seg-btn').forEach(e=>e.classList.remove('on'));el.classList.add('on');currentFilter=f;renderList();}
+
+function exportCSV(){
+  const rows=films.map(f=>[`"${f.title}"`,f.status,f.views,f.dateWatched||'',f.rating?'★'.repeat(f.rating):'',f.imdb||'',f.rt||'',`"${(f.note||'').replace(/"/g,'""')}"`].join(','));
+  const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(['Title,Status,Views,Date Watched,Your Rating,IMDb,RT,Note',...rows].join('\n'));a.download='horror-tracker.csv';a.click();
+}
+function exportPDF(){
+  const seen=films.filter(f=>f.status==='seen'),want=films.filter(f=>f.status==='want');
+  const html=`<html><head><title>Horror Tracker</title><style>body{font-family:sans-serif;padding:32px;color:#111;max-width:800px;margin:0 auto}h1{font-size:22px;margin-bottom:4px}.sub{color:#666;font-size:13px;margin-bottom:24px}h2{font-size:15px;margin:24px 0 10px;border-bottom:1px solid #eee;padding-bottom:6px}table{width:100%;border-collapse:collapse;font-size:12px}th{text-align:left;padding:6px 8px;background:#f5f5f5;border-bottom:1px solid #ddd}td{padding:6px 8px;border-bottom:1px solid #eee;vertical-align:top}.stats{display:flex;gap:24px;margin-bottom:24px}.stat .n{font-size:24px;font-weight:600}.stat .l{font-size:11px;color:#666}</style></head><body><h1>Horror Tracker</h1><div class="sub">exported ${new Date().toLocaleDateString()}</div><div class="stats"><div class="stat"><div class="n">${films.length}</div><div class="l">total</div></div><div class="stat"><div class="n">${seen.length}</div><div class="l">watched</div></div><div class="stat"><div class="n">${want.length}</div><div class="l">to watch</div></div><div class="stat"><div class="n">${films.reduce((a,f)=>a+f.views,0)}</div><div class="l">total views</div></div></div><h2>watched (${seen.length})</h2><table><tr><th>title</th><th>rating</th><th>views</th><th>last watched</th><th>note</th></tr>${seen.sort((a,b)=>a.title.localeCompare(b.title)).map(f=>`<tr><td>${f.title}</td><td>${f.rating?'★'.repeat(f.rating):''}</td><td>${f.views}x</td><td>${f.dateWatched||''}</td><td>${f.note||''}</td></tr>`).join('')}</table><h2>want to watch (${want.length})</h2><table><tr><th>title</th><th>IMDb</th><th>RT</th></tr>${want.sort((a,b)=>a.title.localeCompare(b.title)).map(f=>`<tr><td>${f.title}</td><td>${f.imdb||''}</td><td>${f.rt||''}</td></tr>`).join('')}</table></body></html>`;
+  const w=window.open('','_blank');w.document.write(html);w.document.close();setTimeout(()=>w.print(),500);
+}
 
 async function loadRecs(forceRefresh=false){
-  const cached=localStorage.getItem('ht_recs_cache');
-  const cacheAge=localStorage.getItem('ht_recs_cache_time');
-  if(!forceRefresh&&cached&&cacheAge&&Date.now()-parseInt(cacheAge)<86400000){ recs=JSON.parse(cached); renderRecs(); return; }
-  document.getElementById('rec-list').innerHTML='<div class="loading-spinner"><i class="ti ti-loader spin" style="font-size:24px;display:block;margin-bottom:8px"></i>fetching fresh recs…</div>';
+  const cached=localStorage.getItem('ht_recs_cache'),cacheAge=localStorage.getItem('ht_recs_cache_time');
+  if(!forceRefresh&&cached&&cacheAge&&Date.now()-parseInt(cacheAge)<86400000){recs=JSON.parse(cached);renderRecs();return;}
+  document.getElementById('rec-list').innerHTML='<div class="loading-spinner"><i class="ti ti-loader spin" style="font-size:24px;display:block;margin-bottom:8px" aria-hidden="true"></i>fetching fresh recs…</div>';
   try{
-    const resp=await fetch(`${BACKEND}/api/recs`);
-    const data=await resp.json();
+    const resp=await fetch(`${BACKEND}/api/recs`),data=await resp.json();
     recs=data.map(r=>({...r,state:recs.find(x=>x.id===r.id)?.state||'pending'}));
-    localStorage.setItem('ht_recs_cache',JSON.stringify(recs));
-    localStorage.setItem('ht_recs_cache_time',Date.now().toString());
+    localStorage.setItem('ht_recs_cache',JSON.stringify(recs));localStorage.setItem('ht_recs_cache_time',Date.now().toString());
   }catch(e){
     recs=JSON.parse(localStorage.getItem('ht_recs')||'[]');
-    if(!recs.length){ document.getElementById('rec-list').innerHTML='<div class="loading-spinner" style="color:#A32D2D">backend not connected — add your Railway URL to config</div>'; return; }
+    if(!recs.length){document.getElementById('rec-list').innerHTML='<div class="loading-spinner" style="color:var(--accent-text)">backend not connected — check your Railway URL</div>';return;}
   }
   renderRecs();
 }
-
 function renderRecs(){
   const pending=recs.filter(r=>r.state==='pending');
   document.getElementById('rec-badge').textContent=pending.length||'';
   const rl=document.getElementById('rec-list'),re=document.getElementById('rec-empty');
-  if(!pending.length){ rl.innerHTML=''; re.style.display='block'; return; }
+  if(!pending.length){rl.innerHTML='';re.style.display='block';return;}
   re.style.display='none';
-  rl.innerHTML=pending.map(r=>`
-    <div class="card">
-      <div class="card-title">${r.title} <span class="card-year">(${r.year})</span></div>
-      <div class="card-scores">${scoreChips(r.imdb,r.rt)}</div>
-      ${r.why?`<div class="card-why">${r.why}</div>`:''}
-      ${r.synopsis?`<div class="card-synopsis">${r.synopsis}</div>`:''}
-      ${r.notable?`<div class="card-notable">${r.notable}</div>`:''}
-      <div class="card-actions">
-        <button class="btn-approve" onclick="approveRec('${r.id}')"><i class="ti ti-plus"></i> add to list</button>
-        <button class="btn-reject" onclick="rejectRec('${r.id}')">not for me</button>
-        <a class="btn-imdb" href="https://www.imdb.com/find?q=${encodeURIComponent(r.title)}" target="_blank"><i class="ti ti-external-link"></i> IMDb</a>
-      </div>
-    </div>`).join('');
+  rl.innerHTML=pending.map(r=>`<div class="card"><div class="card-title">${r.title} <span class="card-year">(${r.year})</span></div><div class="card-scores">${scoreChips(r.imdb,r.rt)}</div>${r.why?`<div class="card-why">${r.why}</div>`:''}${r.synopsis?`<div class="card-synopsis">${r.synopsis}</div>`:''}${r.notable?`<div class="card-notable">${r.notable}</div>`:''}<div class="card-actions"><button class="btn-approve" onclick="approveRec('${r.id}')"><i class="ti ti-plus" aria-hidden="true"></i> add to list</button><button class="btn-reject" onclick="rejectRec('${r.id}')">not for me</button><a class="btn-imdb" href="https://www.imdb.com/find?q=${encodeURIComponent(r.title)}" target="_blank"><i class="ti ti-external-link" aria-hidden="true"></i> IMDb</a></div></div>`).join('');
 }
-
-function approveRec(id){
-  const r=recs.find(x=>x.id===id); if(!r) return;
-  if(!films.find(f=>norm(f.title)===norm(r.title)))
-    films.push({id:nextId++,title:r.title,status:'want',views:0,dateWatched:'',note:'',rating:0,imdb:r.imdb||'—',rt:r.rt||'—',synopsis:r.synopsis||'',notable:r.notable||'',poster:null});
-  r.state='approved'; save(); renderRecs(); renderList();
-}
-function rejectRec(id){ recs.find(x=>x.id===id).state='rejected'; save(); renderRecs(); }
+function approveRec(id){const r=recs.find(x=>x.id===id);if(!r)return;if(!films.find(f=>norm(f.title)===norm(r.title)))films.push({id:nextId++,title:r.title,status:'want',views:0,dateWatched:'',note:'',rating:0,imdb:r.imdb||'—',rt:r.rt||'—',synopsis:r.synopsis||'',notable:r.notable||'',poster:null});r.state='approved';save();renderRecs();renderList();}
+function rejectRec(id){recs.find(x=>x.id===id).state='rejected';save();renderRecs();}
 
 async function loadUpcoming(forceRefresh=false){
-  const cached=localStorage.getItem('ht_upcoming_cache');
-  const cacheAge=localStorage.getItem('ht_upcoming_cache_time');
-  if(!forceRefresh&&cached&&cacheAge&&Date.now()-parseInt(cacheAge)<86400000){ upcoming=JSON.parse(cached); renderUpcoming(); return; }
-  document.getElementById('up-list').innerHTML='<div class="loading-spinner"><i class="ti ti-loader spin" style="font-size:24px;display:block;margin-bottom:8px"></i>fetching upcoming releases…</div>';
+  const cached=localStorage.getItem('ht_upcoming_cache'),cacheAge=localStorage.getItem('ht_upcoming_cache_time');
+  if(!forceRefresh&&cached&&cacheAge&&Date.now()-parseInt(cacheAge)<86400000){upcoming=JSON.parse(cached);renderUpcoming();return;}
+  document.getElementById('up-list').innerHTML='<div class="loading-spinner"><i class="ti ti-loader spin" style="font-size:24px;display:block;margin-bottom:8px" aria-hidden="true"></i>fetching upcoming releases…</div>';
   try{
-    const resp=await fetch(`${BACKEND}/api/upcoming`);
-    const data=await resp.json();
+    const resp=await fetch(`${BACKEND}/api/upcoming`),data=await resp.json();
     upcoming=data.map(u=>({...u,added:upcoming.find(x=>x.id===u.id)?.added||false}));
-    localStorage.setItem('ht_upcoming_cache',JSON.stringify(upcoming));
-    localStorage.setItem('ht_upcoming_cache_time',Date.now().toString());
+    localStorage.setItem('ht_upcoming_cache',JSON.stringify(upcoming));localStorage.setItem('ht_upcoming_cache_time',Date.now().toString());
   }catch(e){
     upcoming=JSON.parse(localStorage.getItem('ht_upcoming')||'[]');
-    if(!upcoming.length){ document.getElementById('up-list').innerHTML='<div class="loading-spinner" style="color:#A32D2D">backend not connected — add your Railway URL to config</div>'; return; }
+    if(!upcoming.length){document.getElementById('up-list').innerHTML='<div class="loading-spinner" style="color:var(--accent-text)">backend not connected — check your Railway URL</div>';return;}
   }
   renderUpcoming();
 }
-
 function renderUpcoming(){
-  document.getElementById('up-list').innerHTML=upcoming.map(u=>`
-    <div class="card">
-      <div class="card-title">${u.title} <span class="card-year">(${u.year})</span><span class="up-date-badge">${u.releaseDate}</span></div>
-      <div class="card-scores">${scoreChips(u.imdb,u.rt)}</div>
-      ${u.synopsis?`<div class="card-synopsis">${u.synopsis}</div>`:''}
-      ${u.notable?`<div class="card-notable">${u.notable}</div>`:''}
-      <div class="card-actions">
-        ${u.added
-          ?`<button class="btn-watchlist added"><i class="ti ti-check"></i> on your list</button>`
-          :`<button class="btn-watchlist" onclick="addUpcoming('${u.id}')"><i class="ti ti-plus"></i> add to list</button>`}
-        <a class="btn-imdb" href="https://www.imdb.com/find?q=${encodeURIComponent(u.title)}" target="_blank"><i class="ti ti-external-link"></i> IMDb</a>
-      </div>
-    </div>`).join('');
+  document.getElementById('up-list').innerHTML=upcoming.map(u=>`<div class="card"><div class="card-title">${u.title} <span class="card-year">(${u.year})</span><span class="up-date-badge">${u.releaseDate}</span></div><div class="card-scores">${scoreChips(u.imdb,u.rt)}</div>${u.synopsis?`<div class="card-synopsis">${u.synopsis}</div>`:''}${u.notable?`<div class="card-notable">${u.notable}</div>`:''}<div class="card-actions">${u.added?`<button class="btn-watchlist added"><i class="ti ti-check" aria-hidden="true"></i> on your list</button>`:`<button class="btn-watchlist" onclick="addUpcoming('${u.id}')"><i class="ti ti-plus" aria-hidden="true"></i> add to list</button>`}<a class="btn-imdb" href="https://www.imdb.com/find?q=${encodeURIComponent(u.title)}" target="_blank"><i class="ti ti-external-link" aria-hidden="true"></i> IMDb</a></div></div>`).join('');
 }
-
-function addUpcoming(id){
-  const u=upcoming.find(x=>x.id===id); if(!u) return;
-  if(!films.find(f=>norm(f.title)===norm(u.title)))
-    films.push({id:nextId++,title:u.title,status:'want',views:0,dateWatched:'',note:'',rating:0,imdb:u.imdb||'—',rt:u.rt||'—',synopsis:u.synopsis||'',notable:u.notable||'',poster:null});
-  u.added=true; save(); renderUpcoming(); renderList();
-}
+function addUpcoming(id){const u=upcoming.find(x=>x.id===id);if(!u)return;if(!films.find(f=>norm(f.title)===norm(u.title)))films.push({id:nextId++,title:u.title,status:'want',views:0,dateWatched:'',note:'',rating:0,imdb:u.imdb||'—',rt:u.rt||'—',synopsis:u.synopsis||'',notable:u.notable||'',poster:null});u.added=true;save();renderUpcoming();renderList();}
 
 function mainTab(el,tab){
-  document.querySelectorAll('.mt').forEach(e=>e.classList.remove('on'));
-  el.classList.add('on');
-  document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
-  document.getElementById('pg-'+tab).classList.add('on');
-  if(tab==='recs'&&!recs.length) loadRecs();
-  if(tab==='upcoming'&&!upcoming.length) loadUpcoming();
+  document.querySelectorAll('.mt').forEach(e=>e.classList.remove('on'));el.classList.add('on');
+  document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));document.getElementById('pg-'+tab).classList.add('on');
+  if(tab==='recs'&&!recs.length)loadRecs();
+  if(tab==='upcoming'&&!upcoming.length)loadUpcoming();
 }
 
 renderList();
 </script>
-<div style="text-align:center;padding:20px;font-size:11px;color:var(--text3)">
-  built by Mike Gracen · <a href="https://github.com/mgracen/horror-tracker" style="color:var(--text3)">source</a>
-</div>
 </body>
 </html>
