@@ -1,3 +1,4 @@
+<img width="1366" height="768" alt="Screenshot 2026-07-23 7 25 30 PM" src="https://github.com/user-attachments/assets/b0e8a837-233f-46d8-a1c7-c8c435425337" />
 <img width="1366" height="768" alt="Screenshot 2026-07-23 7 25 05 PM" src="https://github.com/user-attachments/assets/9dadeff2-d23a-4e17-adb5-b13a699bfb7c" />
 # Horror Tracker
 
