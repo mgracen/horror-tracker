@@ -1,4 +1,4 @@
-<img width="1366" height="768" alt="Screenshot 2026-07-23 7 25 30 PM" src="https://github.com/user-attachments/assets/b0e8a837-233f-46d8-a1c7-c8c435425337" />
+<img width="1140" height="581" alt="Screenshot 2026-07-24 10 30 19 PM" src="https://github.com/user-attachments/assets/793248da-4aed-4ac7-8f56-38fca0d3417e" />
 # Horror Tracker
 
 A personal horror and thriller movie tracker. Search any film, track what you have watched, log notes and ratings, and get curated recommendations sourced from r/horror, Bloody Disgusting, Fangoria and Fantasia.
